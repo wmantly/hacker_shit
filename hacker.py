@@ -12,45 +12,65 @@ fake = Faker()
 color.use_true_colors()
 color.update_palette({'darkred': '#c11b55'})
 
+def random_color(text):
+	out = ''
+	while random.randint(0,1):
+		styles = ['bold','italic','underlined','blinkslow','blinkrapid','struckthrough']
+		out += random.choice(styles)
+		out += '_'
+	out += random.choice(list(color.colorful.__dict__['_colorpalette'].keys()))
+	if random.randint(0,1):
+		out += '_on_'
+		out += random.choice(list(color.colorful.__dict__['_colorpalette'].keys()))
+	return getattr(color, out)(text)
+
 def func0():
-	print(color.plum(uuid4().hex))
+	print(random_color(uuid4().hex))
 
 def func1():
 	print(
-		'\nName:', color.green(fake.name()),
-		'\nEmail:', color.yellow(fake.email()),
-		'\nJob:', color.blue(fake.job()),
-		'\nAdress:', color.green(fake.address()),
-		'\nSSN:', color.red(fake.ssn()),
-		'\nPhone Number:', color.brown(fake.phone_number())
+		'\nName:', random_color(fake.name()),
+		'\nEmail:', random_color(fake.email()),
+		'\nJob:', random_color(fake.job()),
+		'\nAdress:', random_color(fake.address()),
+		'\nSSN:', random_color(fake.ssn()),
+		'\nPhone Number:', random_color(fake.phone_number()),
 	)
 
 def func2():
 	print(
-		color.bold_red_on_green(fake.ipv4()),
-		color.italic_black_on_white(fake.company()),
-		color.black_on_white(fake.country())
+		random_color(fake.ipv4()),
+		random_color(fake.company()),
+		random_color(fake.country())
 	)
 
 def func3():
-	print(color.gold('='*80))
+	print(random_color('='*80))
 
 def func4():
 	words = ' '.join(fake.words(random.randint(3,10)))
-	print(color.black_on_red(words))
+	print(random_color(words))
 
 def func5():
-	print(color.purple(fake.sha256()))
+	print(random_color(fake.sha256()))
 
 def func6():
 	print(
-		'\nUser Name:', color.italic_coral_on_beige(fake.user_name()),
-		'\nPassword:', color.green_on_plum(fake.password()),
-		'\nAgent:', color.darkred(fake.user_agent()) 
+		'\nUser Name:', random_color(fake.user_name()),
+		'\nPassword:', random_color(fake.password()),
+		'\nAgent:', random_color(fake.user_agent()) 
 	)
 
+def func7():
+	count = 1
+	while True:
+		print('saning --', '!'*count)
+		count +=1
+		if random.randint(1,10) == 5 or count == 25: return 
+		sleep(random.randint(0,3))
 
-funcs = [func0, func1, func2, func3, func4, func5, func6]
+
+funcs = [func0, func1, func2, func3, func4, func5, func6, func7]
 
 def main():
 	last = None
